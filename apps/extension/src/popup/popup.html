@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Tracker</title>
+    <style>
+      body {
+        width: 360px;
+        margin: 0;
+        padding: 12px;
+        font-family: "Segoe UI", sans-serif;
+        background: #f8fafc;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 18px;
+      }
+      form {
+        display: grid;
+        gap: 8px;
+      }
+      input,
+      textarea,
+      select,
+      button {
+        font: inherit;
+        padding: 8px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+      }
+      button {
+        background: #146356;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+      .secondary {
+        background: #334155;
+      }
+      .link-btn {
+        border: 0;
+        padding: 0;
+        background: transparent;
+        color: #146356;
+        text-align: left;
+        font-size: 12px;
+        text-decoration: underline;
+      }
+      .muted {
+        margin: 0;
+        color: #64748b;
+        font-size: 12px;
+      }
+      .hidden {
+        display: none;
+      }
+      .insights {
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        padding: 8px;
+        background: #ffffff;
+      }
+      .insights-title {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 600;
+        color: #0f172a;
+      }
+      .insights-list {
+        margin: 6px 0 0;
+        font-size: 12px;
+        color: #334155;
+        min-height: 14px;
+      }
+      .fit-card {
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        padding: 8px;
+        background: #f8fafc;
+      }
+      .fit-score {
+        margin: 0;
+        font-weight: 700;
+        font-size: 13px;
+        color: #0f172a;
+      }
+      .fit-score.strong {
+        color: #065f46;
+      }
+      .fit-score.good {
+        color: #1e40af;
+      }
+      .fit-score.weak {
+        color: #92400e;
+      }
+      .fit-score.not-recommended {
+        color: #9f1239;
+      }
+      .fit-reasons {
+        margin: 6px 0 0;
+        padding-left: 16px;
+        font-size: 12px;
+        color: #334155;
+      }
+      #status {
+        min-height: 18px;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Save Job</h1>
+    <section id="auth-section">
+      <p class="muted" id="auth-title">Login to continue</p>
+      <form id="auth-form">
+        <input id="apiBaseUrl" placeholder="API URL" value="http://localhost:4000" />
+        <input id="name" class="hidden" placeholder="Name" type="text" />
+        <input id="email" placeholder="Email" type="email" required />
+        <input id="password" placeholder="Password" type="password" required minlength="6" />
+        <button type="submit" class="secondary" id="auth-submit-btn">Login & Connect</button>
+      </form>
+      <button type="button" id="auth-mode-toggle" class="link-btn">No account? Sign up</button>
+    </section>
+
+    <section id="job-section" class="hidden">
+      <form id="job-form">
+        <input id="companyName" placeholder="Company" required />
+        <input id="jobTitle" placeholder="Job title" required />
+        <select id="resumeId">
+          <option value="">Select resume for fit analysis</option>
+        </select>
+        <input id="location" placeholder="Location" />
+        <select id="workplaceType">
+          <option value="">Work mode (optional)</option>
+          <option value="onsite">Onsite</option>
+          <option value="remote">Remote</option>
+          <option value="hybrid">Hybrid</option>
+        </select>
+        <input id="sourcePlatform" placeholder="Platform" />
+        <input id="applicationDate" type="date" required />
+        <select id="jobStatus">
+          <option>Applied</option>
+          <option>Saved</option>
+          <option>Interview</option>
+          <option>Rejected</option>
+          <option>Offer</option>
+        </select>
+        <textarea id="notes" placeholder="Notes"></textarea>
+        <div class="insights">
+          <p class="insights-title">Technologies</p>
+          <p class="insights-list" id="technology-list">No technologies extracted yet.</p>
+        </div>
+        <div class="insights">
+          <p class="insights-title">Skills</p>
+          <p class="insights-list" id="skill-list">No skills extracted yet.</p>
+        </div>
+        <div class="fit-card" id="fit-card">
+          <p class="fit-score" id="fit-score">Fit score not analyzed yet.</p>
+          <ul class="fit-reasons" id="fit-reasons"></ul>
+        </div>
+        <button type="button" id="extract-btn" class="secondary">Auto Fill From Page</button>
+        <button type="button" id="analyze-btn" class="secondary">Analyze Fit</button>
+        <button type="submit">Save Application</button>
+      </form>
+      <button type="button" id="logout-btn" class="link-btn">Logout</button>
+    </section>
+
+    <div id="status"></div>
+    <script src="./popup.js"></script>
+  </body>
+</html>

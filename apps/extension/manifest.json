@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Job Tracker Capture",
+  "version": "0.1.0",
+  "description": "Capture job applications and sync with Job Tracker backend.",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>", "http://localhost:4000/*"],
+  "background": {
+    "service_worker": "src/background/background.js"
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "src/extractors/registry.js",
+        "src/extractors/linkedin.js",
+        "src/extractors/indeed.js",
+        "src/extractors/greenhouse.js",
+        "src/extractors/lever.js",
+        "src/extractors/generic.js",
+        "src/content/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

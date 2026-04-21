@@ -1,0 +1,15 @@
+{
+  "name": "job-tracker",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run start:dev --workspace @job-tracker/api",
+    "dev:web": "npm run dev --workspace @job-tracker/web",
+    "build": "npm run build --workspace @job-tracker/shared-types && npm run build --workspace @job-tracker/api && npm run build --workspace @job-tracker/web",
+    "lint": "npm run lint --workspace @job-tracker/api && npm run lint --workspace @job-tracker/web"
+  }
+}
