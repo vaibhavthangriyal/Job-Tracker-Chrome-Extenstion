@@ -7,6 +7,65 @@ Monorepo for a Job Application Tracker with:
 - Chrome extension capture client (`apps/extension`)
 - Shared TypeScript contracts (`packages/shared-types`)
 
+## Features
+
+### Authentication & Security
+
+- Signup/login with JWT access + refresh tokens
+- Cookie-based web session support
+- CSRF protection for cookie-authenticated mutating requests
+- Refresh-token rotation with reuse detection and session revocation
+- Logout and session verification endpoints
+
+### Applications Management
+
+- Create, list, update, and delete job applications
+- Search/filter/sort/pagination on applications list
+- Status tracking (`Saved`, `Applied`, `Interview`, `Offer`, etc.)
+- Track location, work mode, platform, notes, tags, and dates
+- Duplicate-prevention check on create
+
+### Resume Intelligence
+
+- Upload resume files (`.pdf`, `.txt`, `.md`, `.text`)
+- Parse and store resume profile:
+  - total experience
+  - key skills
+  - preferred locations
+  - preferred work mode
+- Set active resume and manually edit parsed profile values
+
+### Job Fit Scoring
+
+- Analyze extracted/manual job details against selected resume
+- Score breakdown by:
+  - skills fit
+  - experience fit
+  - location/work-mode fit
+- Rating output:
+  - `Strong Match`
+  - `Good Match`
+  - `Weak Match`
+  - `Not Recommended`
+- Reason list explaining the match result
+- Color-coded match result badges in dashboard and extension popup
+
+### Chrome Extension
+
+- Login/signup directly in popup
+- Auto-detect authenticated session and show job form automatically
+- Content-script job extraction with site-specific parsers + fallback parser
+- Extracts company/title/location/work mode/description/skills/technologies
+- Save application directly to backend
+- Analyze fit from popup using selected resume
+
+### Dashboard (Next.js)
+
+- Login page with session-aware access
+- Applications table with inline status updates
+- Resume upload and profile editing UI
+- Fit analysis panel with score, rating, color coding, and reasons
+
 ## 1) Install
 
 ```bash
